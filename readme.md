@@ -1,8 +1,8 @@
-##TextAdventure
+## TextAdventure
 
 A basic text adventure to learn OOP within a language such as Java.
 
-###ToDo
+### ToDo
 * Events
     * Disable event once it's happened.
     * Enemy event
