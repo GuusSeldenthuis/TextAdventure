@@ -3,17 +3,17 @@
 A basic text-adventure game written in Java.
 
 ### ToDo
-* Events
-  - [ ] https://github.com/GuusSeldenthuis/TextAdventure/issues/1
-  - [ ] https://github.com/GuusSeldenthuis/TextAdventure/issues/2
-    * Enemies & fighting
-        - [ ] https://github.com/GuusSeldenthuis/TextAdventure/issues/5
-        - [ ] https://github.com/GuusSeldenthuis/TextAdventure/issues/3
-* Rooms
-  - [ ] https://github.com/GuusSeldenthuis/TextAdventure/issues/6
-  - [ ] https://github.com/GuusSeldenthuis/TextAdventure/issues/7
-* Display
-  - [ ] https://github.com/GuusSeldenthuis/TextAdventure/issues/8
-  - [ ] https://github.com/GuusSeldenthuis/TextAdventure/issues/9
-* Other
-  - [ ] https://github.com/GuusSeldenthuis/TextAdventure/issues/4
+* 🎉 Events
+  - [ ] [Events happening once](https://github.com/GuusSeldenthuis/TextAdventure/issues/1)
+    * ⚔️ Enemies & fighting
+        - [ ] [Fight mechanics](https://github.com/GuusSeldenthuis/TextAdventure/issues/5)
+        - [ ] [Enemy properties](https://github.com/GuusSeldenthuis/TextAdventure/issues/3)
+* 🏠 Rooms
+  - [ ] [Random generated rooms with random events](https://github.com/GuusSeldenthuis/TextAdventure/issues/6)
+  - [ ] [Pre-set grid params to generated rooms in](https://github.com/GuusSeldenthuis/TextAdventure/issues/7)
+* 🖥️ Display
+  - [ ] [Interactive cli interface](https://github.com/GuusSeldenthuis/TextAdventure/issues/8)
+  - [ ] [Minimap](https://github.com/GuusSeldenthuis/TextAdventure/issues/9)
+* ✏️ Other
+  - [ ] [Items & inventory](https://github.com/GuusSeldenthuis/TextAdventure/issues/4)
+  - [ ] [Player statistic](https://github.com/GuusSeldenthuis/TextAdventure/issues/2)
