@@ -3,7 +3,12 @@ package game;
 import events.Enemy;
 import events.Loot;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Game
@@ -12,36 +17,85 @@ public class Game
     public static int currentRow = 0;    // First index - up/down
     public static int currentCol = 0;    // Second index - left/right
 
-    public static Room[][] setupRooms()
-    {
-        ArrayList<RoomEvent> room1Events = new ArrayList<>();
-        room1Events.add(new Enemy());
-        Room room1 = new Room("The Entrance", room1Events, "It's dark in here.");
+    private static List<String> loadFile(String filename) {
+        try {
+            return Files.readAllLines(Paths.get("src/main/resources/" + filename));
+        } catch (IOException e) {
+            System.err.println("Error loading " + filename + ": " + e.getMessage());
+            return new ArrayList<>();
+        }
+    }
 
-        ArrayList<RoomEvent> room2Events = new ArrayList<>();
-        room2Events.add(new Loot());
-        Room room2 = new Room("The Treasure Room", room2Events, "It's very beautiful here.");
+    private static String getRandomElement(List<String> list) {
+        if (list.isEmpty()) return "Empty Room";
+        Random random = new Random();
+        return list.get(random.nextInt(list.size()));
+    }
 
-        ArrayList<RoomEvent> room3Events = new ArrayList<>();
-        room3Events.add(new Enemy());
-        room3Events.add(new Loot());
-        Room room3 = new Room("The Cellar", room3Events, "Everything is covered in blood.");
+    private static ArrayList<RoomEvent> generateRandomEvents() {
+        ArrayList<RoomEvent> events = new ArrayList<>();
+        Random random = new Random();
+        
+        // 70% chance for an enemy
+        if (random.nextDouble() < 0.7) {
+            events.add(new Enemy());
+        }
+        
+        // 60% chance for loot
+        if (random.nextDouble() < 0.6) {
+            events.add(new Loot());
+        }
+        
+        return events;
+    }
 
-        ArrayList<RoomEvent> room4Events = new ArrayList<>();
-        room4Events.add(new Loot());
-        Room room4 = new Room("The Kitchen", room4Events, "Wow, so beautiful.");
-
+    public static Room[][] setupRooms() {
+        List<String> names = loadFile("room_names.txt");
+        List<String> descriptions = loadFile("room_descriptions.txt");
         Room[][] rooms = new Room[2][2];
 
-        // Layout the rooms in a more intuitive way:
-        // [0,0] = Entrance    [0,1] = Treasure Room
-        // [1,0] = Cellar      [1,1] = Kitchen
-        rooms[0][0] = room1;
-        rooms[0][1] = room2;
-        rooms[1][0] = room3;
-        rooms[1][1] = room4;
+        // Generate random rooms
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < 2; j++) {
+                String name = getRandomElement(names);
+                String description = getRandomElement(descriptions);
+                ArrayList<RoomEvent> events = generateRandomEvents();
+                rooms[i][j] = new Room(name, events, description);
+            }
+        }
 
         return rooms;
+    }
+
+    private static void displayMap() {
+        System.out.println("\n=== MAP ===");
+        for (int i = 0; i < rooms.length; i++) {
+            // Top border of rooms
+            for (int j = 0; j < rooms[i].length; j++) {
+                System.out.print("+---");
+            }
+            System.out.println("+");
+            
+            // Room contents
+            for (int j = 0; j < rooms[i].length; j++) {
+                System.out.print("|");
+                if (i == currentRow && j == currentCol) {
+                    System.out.print(" * "); // Current position
+                } else if (rooms[i][j].visited) {
+                    System.out.print(" · "); // Visited room
+                } else {
+                    System.out.print("   "); // Undiscovered room
+                }
+            }
+            System.out.println("|");
+        }
+        
+        // Bottom border
+        for (int j = 0; j < rooms[0].length; j++) {
+            System.out.print("+---");
+        }
+        System.out.println("+");
+        System.out.println("Legend: * = You are here, · = Visited room");
     }
 
     /**
@@ -87,6 +141,8 @@ public class Game
         while (true)
         {
             Room currentRoom = rooms[currentRow][currentCol];
+            currentRoom.visited = true;
+            displayMap();
             System.out.println("\n=== " + currentRoom.name + " ===");
             System.out.println(currentRoom.description);
             System.out.println();

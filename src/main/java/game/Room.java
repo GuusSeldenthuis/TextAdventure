@@ -10,6 +10,7 @@ public class Room
     private ArrayList<RoomEvent> roomEvents;
 
     public String description;
+    public boolean visited;
 
     public Room(String name, ArrayList<RoomEvent> roomEvents, String description)
     {

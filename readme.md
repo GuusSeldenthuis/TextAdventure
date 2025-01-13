@@ -13,7 +13,7 @@ A basic text-adventure game written in Java.
   - [ ] [Pre-set grid params to generated rooms in](https://github.com/GuusSeldenthuis/TextAdventure/issues/7)
 * 🖥️ Display
   - [ ] [Interactive cli interface](https://github.com/GuusSeldenthuis/TextAdventure/issues/8)
-  - [ ] [Minimap](https://github.com/GuusSeldenthuis/TextAdventure/issues/9)
+  - [x] [Minimap](https://github.com/GuusSeldenthuis/TextAdventure/issues/9)
 * ✏️ Other
   - [ ] [Items & inventory](https://github.com/GuusSeldenthuis/TextAdventure/issues/4)
   - [ ] [Player statistic](https://github.com/GuusSeldenthuis/TextAdventure/issues/2)
