@@ -8,12 +8,9 @@ import java.util.Scanner;
 
 public class Game
 {
-
     public static Room[][] rooms = new Room[2][2];
-
-    public static int locationX = 0;
-
-    public static int locationY = 0;
+    public static int currentRow = 0;    // First index - up/down
+    public static int currentCol = 0;    // Second index - left/right
 
     public static Room[][] setupRooms()
     {
@@ -36,12 +33,50 @@ public class Game
 
         Room[][] rooms = new Room[2][2];
 
+        // Layout the rooms in a more intuitive way:
+        // [0,0] = Entrance    [0,1] = Treasure Room
+        // [1,0] = Cellar      [1,1] = Kitchen
         rooms[0][0] = room1;
         rooms[0][1] = room2;
         rooms[1][0] = room3;
         rooms[1][1] = room4;
 
         return rooms;
+    }
+
+    /**
+     * Attempts to move the player in the specified direction.
+     * @param direction The direction to move (up, down, left, right)
+     * @return true if movement was successful, false otherwise
+     */
+    private static boolean movePlayer(String direction) {
+        switch (direction) {
+            case "up":
+                if (currentRow > 0) {
+                    currentRow--;
+                    return true;
+                }
+                break;
+            case "down":
+                if (currentRow < rooms.length - 1) {
+                    currentRow++;
+                    return true;
+                }
+                break;
+            case "left":
+                if (currentCol > 0) {
+                    currentCol--;
+                    return true;
+                }
+                break;
+            case "right":
+                if (currentCol < rooms[0].length - 1) {
+                    currentCol++;
+                    return true;
+                }
+                break;
+        }
+        return false;
     }
 
     public static void main(String[] args)
@@ -51,49 +86,26 @@ public class Game
 
         while (true)
         {
-            System.out.println("You are in the room: " + rooms[locationX][locationY].name);
-            System.out.println(rooms[locationX][locationY].description);
+            Room currentRoom = rooms[currentRow][currentCol];
+            System.out.println("\n=== " + currentRoom.name + " ===");
+            System.out.println(currentRoom.description);
             System.out.println();
-            rooms[locationX][locationY].runEvents();
+            
+            // Show available directions
+            System.out.println("Available exits:");
+            if (currentRow > 0) System.out.println("- up");
+            if (currentRow < rooms.length - 1) System.out.println("- down");
+            if (currentCol > 0) System.out.println("- left");
+            if (currentCol < rooms[0].length - 1) System.out.println("- right");
+            System.out.println();
+
+            currentRoom.runEvents();
             System.out.println();
             System.out.println("Where do you want to go?");
+            
             String direction = scanner.next().toLowerCase();
-            switch (direction)
-            {
-                case "left":
-                    if (locationX > 0)
-                    {
-                        locationX--;
-                    } else {
-                        System.out.println("You can't go that way!");
-                    }
-                    break;
-                case "right":
-                    if (locationX < rooms.length - 1)
-                    {
-                        locationX++;
-                    } else {
-                        System.out.println("You can't go that way!");
-                    }
-                    break;
-                case "up":
-                    if (locationY < rooms[0].length - 1)
-                    {
-                        locationY++;
-                    } else {
-                        System.out.println("You can't go that way!");
-                    }
-                    break;
-                case "down":
-                    if (locationY > 0)
-                    {
-                        locationY--;
-                    } else {
-                        System.out.println("You can't go that way!");
-                    }
-                    break;
-                default:
-                    System.out.println("Options: left, right, up, down");
+            if (!movePlayer(direction)) {
+                System.out.println("You can't go that way!");
             }
         }
     }
