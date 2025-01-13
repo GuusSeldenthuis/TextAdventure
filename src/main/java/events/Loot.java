@@ -8,7 +8,7 @@ public class Loot implements RoomEvent
     @Override
     public String describe()
     {
-        return "Je hebt een kist gevonden!";
+        return "You found a chest!";
     }
 
     @Override
@@ -16,17 +16,17 @@ public class Loot implements RoomEvent
     {
         switch (action)
         {
-            case Slaan:
-                System.out.println("Auw! Dat doet pijn.");
+            case Attack:
+                System.out.println("Ouch! That hurts.");
                 return;
-            case Ren:
-                System.out.println("Je vlucht weg van de kist.");
+            case Run:
+                System.out.println("You run away from the chest.");
                 return;
             case Open:
-                System.out.println("Je opent de kist, is zit geld in!");
+                System.out.println("You open the chest, there's money inside!");
                 return;
-            case Negeer:
-                System.out.println("Je negeert de kist.");
+            case Ignore:
+                System.out.println("You ignore the chest.");
                 return;
         }
     }

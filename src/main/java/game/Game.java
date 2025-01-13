@@ -17,29 +17,29 @@ public class Game
 
     public static Room[][] setupRooms()
     {
-        ArrayList<RoomEvent> kamer1Events = new ArrayList<>();
-        kamer1Events.add(new Enemy());
-        Room kamer1 = new Room("De ingang", kamer1Events, "Het is hier donker.");
+        ArrayList<RoomEvent> room1Events = new ArrayList<>();
+        room1Events.add(new Enemy());
+        Room room1 = new Room("The Entrance", room1Events, "It's dark in here.");
 
-        ArrayList<RoomEvent> kamer2Events = new ArrayList<>();
-        kamer2Events.add(new Loot());
-        Room kamer2 = new Room("De schatkamer", kamer2Events, "Het is hier heel mooi.");
+        ArrayList<RoomEvent> room2Events = new ArrayList<>();
+        room2Events.add(new Loot());
+        Room room2 = new Room("The Treasure Room", room2Events, "It's very beautiful here.");
 
-        ArrayList<RoomEvent> kamer3Events = new ArrayList<>();
-        kamer3Events.add(new Enemy());
-        kamer3Events.add(new Loot());
-        Room kamer3 = new Room("De kelder", kamer3Events, "Alles zit onder het bloed.");
+        ArrayList<RoomEvent> room3Events = new ArrayList<>();
+        room3Events.add(new Enemy());
+        room3Events.add(new Loot());
+        Room room3 = new Room("The Cellar", room3Events, "Everything is covered in blood.");
 
-        ArrayList<RoomEvent> kamer4Events = new ArrayList<>();
-        kamer4Events.add(new Loot());
-        Room kamer4 = new Room("De keuken", kamer4Events, "Wow, zo mooi.");
+        ArrayList<RoomEvent> room4Events = new ArrayList<>();
+        room4Events.add(new Loot());
+        Room room4 = new Room("The Kitchen", room4Events, "Wow, so beautiful.");
 
         Room[][] rooms = new Room[2][2];
 
-        rooms[0][0] = kamer1;
-        rooms[0][1] = kamer2;
-        rooms[1][0] = kamer3;
-        rooms[1][1] = kamer4;
+        rooms[0][0] = room1;
+        rooms[0][1] = room2;
+        rooms[1][0] = room3;
+        rooms[1][1] = room4;
 
         return rooms;
     }
@@ -51,41 +51,49 @@ public class Game
 
         while (true)
         {
-            System.out.println("Je bent in de kamer: " + rooms[locationX][locationY].naam);
+            System.out.println("You are in the room: " + rooms[locationX][locationY].name);
             System.out.println(rooms[locationX][locationY].description);
             System.out.println();
             rooms[locationX][locationY].runEvents();
             System.out.println();
-            System.out.println("Waar wil je heen?");
-            String richting = scanner.next();
-            switch (richting)
+            System.out.println("Where do you want to go?");
+            String direction = scanner.next().toLowerCase();
+            switch (direction)
             {
-                case "links":
-                    if (locationX != 0)
+                case "left":
+                    if (locationX > 0)
                     {
                         locationX--;
+                    } else {
+                        System.out.println("You can't go that way!");
                     }
-                    continue;
-                case "rechts":
-                    if (locationX != 1)
+                    break;
+                case "right":
+                    if (locationX < rooms.length - 1)
                     {
                         locationX++;
+                    } else {
+                        System.out.println("You can't go that way!");
                     }
-                    continue;
-                case "boven":
-                    if (locationY != 1)
+                    break;
+                case "up":
+                    if (locationY < rooms[0].length - 1)
                     {
                         locationY++;
+                    } else {
+                        System.out.println("You can't go that way!");
                     }
-                    continue;
-                case "onder":
-                    if (locationY != 0)
+                    break;
+                case "down":
+                    if (locationY > 0)
                     {
                         locationY--;
+                    } else {
+                        System.out.println("You can't go that way!");
                     }
-                    continue;
+                    break;
                 default:
-                    System.out.println("Opties: links, rechts, boven, onder");
+                    System.out.println("Options: left, right, up, down");
             }
         }
     }

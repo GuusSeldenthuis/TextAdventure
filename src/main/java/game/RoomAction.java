@@ -2,8 +2,8 @@ package game;
 
 public enum RoomAction
 {
-    Slaan,
-    Ren,
+    Attack,
+    Run,
     Open,
-    Negeer
+    Ignore
 }

@@ -5,15 +5,15 @@ import java.util.Scanner;
 
 public class Room
 {
-    public String naam;
+    public String name;
 
     private ArrayList<RoomEvent> roomEvents;
 
     public String description;
 
-    public Room(String naam, ArrayList<RoomEvent> roomEvents, String description)
+    public Room(String name, ArrayList<RoomEvent> roomEvents, String description)
     {
-        this.naam = naam;
+        this.name = name;
         this.roomEvents = roomEvents;
         this.description = description;
     }
@@ -25,27 +25,27 @@ public class Room
 
             System.out.println("\t" + roomEvent.describe());
             System.out.println();
-            System.out.println("Wat wil je doen? (Slaan, Ren, Open, Negeer)");
+            System.out.println("What do you want to do? (Attack, Run, Open, Ignore)");
 
             Scanner scanner = new Scanner(System.in);
-            String gegevenActie = scanner.next();
+            String givenAction = scanner.next();
 
-            switch (gegevenActie)
+            switch (givenAction)
             {
-                case "Slaan":
-                    roomEvent.reaction(RoomAction.Slaan);
-                    continue;
-                case "Ren":
-                    roomEvent.reaction(RoomAction.Ren);
-                    continue;
+                case "Attack":
+                    roomEvent.reaction(RoomAction.Attack);
+                    break;
+                case "Run":
+                    roomEvent.reaction(RoomAction.Run);
+                    break;
                 case "Open":
                     roomEvent.reaction(RoomAction.Open);
-                    continue;
-                case "Negeer":
-                    roomEvent.reaction(RoomAction.Negeer);
-                    continue;
+                    break;
+                case "Ignore":
+                    roomEvent.reaction(RoomAction.Ignore);
+                    break;
                 default:
-                    System.out.println("Onbekende actie");
+                    System.out.println("Unknown action");
             }
         }
     }

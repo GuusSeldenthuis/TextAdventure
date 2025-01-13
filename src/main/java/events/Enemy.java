@@ -8,7 +8,7 @@ public class Enemy implements RoomEvent
     @Override
     public String describe()
     {
-        return "Er is een vijand!";
+        return "There is an enemy!";
     }
 
     @Override
@@ -16,17 +16,17 @@ public class Enemy implements RoomEvent
     {
         switch (action)
         {
-            case Slaan:
-                System.out.println("Je slaat de vijand.");
+            case Attack:
+                System.out.println("You attack the enemy.");
                 return;
-            case Ren:
-                System.out.println("Je vlucht weg.");
+            case Run:
+                System.out.println("You run away.");
                 return;
             case Open:
-                System.out.println("Je opent de vijand?!?");
+                System.out.println("You try to open the enemy?!?");
                 return;
-            case Negeer:
-                System.out.println("Je negeert de vijand.");
+            case Ignore:
+                System.out.println("You ignore the enemy.");
                 return;
         }
     }
